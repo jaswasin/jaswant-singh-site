@@ -1,0 +1,103 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#0b0f19;
+color:white;
+overflow-x:hidden;
+}
+
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 20% 30%,#1e3a8a,transparent),
+radial-gradient(circle at 80% 70%,#9333ea,transparent);
+z-index:-1;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+padding:25px 10%;
+backdrop-filter:blur(10px);
+}
+
+nav a{
+margin-left:25px;
+color:white;
+text-decoration:none;
+opacity:.8;
+}
+
+header{
+height:85vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:0 10%;
+}
+
+h1{
+font-size:64px;
+line-height:1.1;
+}
+
+header p{
+margin-top:20px;
+font-size:20px;
+opacity:.8;
+}
+
+button{
+margin-top:30px;
+padding:14px 28px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#6366f1,#a855f7);
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+section{
+padding:100px 10%;
+}
+
+.glass{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border-radius:20px;
+}
+
+.card{
+margin-top:40px;
+padding:30px;
+border-radius:18px;
+background:rgba(255,255,255,0.04);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.cta{
+display:inline-block;
+margin-top:25px;
+padding:14px 26px;
+border-radius:10px;
+background:#6366f1;
+text-decoration:none;
+color:white;
+}
+
+footer{
+text-align:center;
+padding:40px;
+opacity:.6;
+}
