@@ -6,8 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 
-// Get the base path from vite config
-const basePath = "/jaswant-singh-site";
+// Only use base path for production (GitHub Pages)
+// Local dev runs on root path
+const basePath = import.meta.env.PROD ? "/jaswant-singh-site" : "/";
 
 function AppRouter() {
   return (

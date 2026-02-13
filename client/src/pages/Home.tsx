@@ -4,20 +4,6 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { SkillCard } from "@/components/SkillCard";
 import { ExperienceItem } from "@/components/ExperienceItem";
 import { Footer } from "@/components/Footer";
-import { useContactForm } from "@/hooks/use-contact";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertMessageSchema, type InsertMessage } from "@shared/schema";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { 
   Cloud, 
@@ -32,26 +18,8 @@ import {
   ChevronDown,
   CheckCircle2
 } from "lucide-react";
-import { Link as ScrollLink } from "react-scroll";
 
 export default function Home() {
-  const contactMutation = useContactForm();
-
-  const form = useForm<InsertMessage>({
-    resolver: zodResolver(insertMessageSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  function onSubmit(data: InsertMessage) {
-    contactMutation.mutate(data, {
-      onSuccess: () => form.reset(),
-    });
-  }
-
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navigation />
@@ -85,20 +53,14 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <ScrollLink to="contact" smooth={true} duration={500} offset={-80}>
-                  <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
-                    Start a Conversation
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </ScrollLink>
                 <Button 
-                  variant="outline" 
                   size="lg" 
-                  className="w-full sm:w-auto h-14 px-8 text-base rounded-xl border-white/10 hover:bg-white/5"
+                  className="w-full sm:w-auto h-14 px-8 text-base rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25"
                   asChild
                 >
                   <a href="/resume.docx" download>
                     Download Resume
+                    <ArrowRight className="ml-2 w-5 h-5" />
                   </a>
                 </Button>
               </div>
@@ -313,97 +275,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
-      <section id="contact" className="section-padding">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
-              <SectionHeader 
-                title="Let's Connect" 
-                subtitle="Whether you have a question about enterprise architecture, need consulting, or just want to say hi, I'll try my best to get back to you!"
-                align="left"
-              />
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <Globe className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Location</h4>
-                    <p className="text-muted-foreground">Available for Remote & Hybrid roles</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <CheckCircle2 className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Expertise</h4>
-                    <p className="text-muted-foreground">Cloud Architecture, AI, DevOps</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="glass-card p-8 rounded-3xl border border-white/10">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="John Doe" className="bg-secondary/50 border-white/10 h-12" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="john@example.com" className="bg-secondary/50 border-white/10 h-12" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder="Tell me about your project..." 
-                            className="bg-secondary/50 border-white/10 min-h-[150px] resize-none" 
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button 
-                    type="submit" 
-                    className="w-full h-12 text-base font-semibold" 
-                    disabled={contactMutation.isPending}
-                  >
-                    {contactMutation.isPending ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>

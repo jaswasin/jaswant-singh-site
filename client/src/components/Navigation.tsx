@@ -11,7 +11,6 @@ const navItems = [
   { name: "Skills", to: "skills" },
   { name: "Experience", to: "experience" },
   { name: "Achievements", to: "achievements" },
-  { name: "Contact", to: "contact" },
 ];
 
 export function Navigation() {
