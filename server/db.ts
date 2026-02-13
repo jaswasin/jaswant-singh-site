@@ -4,11 +4,15 @@ import * as schema from "@shared/schema";
 
 const { Pool } = pg;
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
-}
+// Detect whether a real Postgres database has been configured.
+export const hasDatabase = Boolean(process.env.DATABASE_URL);
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
+// When DATABASE_URL is provided, create a real pool and drizzle client.
+// Otherwise export nulls so the app can fall back to an in-memory storage in dev.
+export let pool: any = null;
+export let db: any = null;
+
+if (hasDatabase) {
+  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  db = drizzle(pool, { schema });
+}
