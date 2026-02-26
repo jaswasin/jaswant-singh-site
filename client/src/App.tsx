@@ -1,38 +1,18 @@
-import { Switch, Route, Router } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
-import Home from "@/pages/Home";
-
-// Only use base path for production (GitHub Pages)
-// Local dev runs on root path
-const basePath = window.location.hostname.endsWith("github.io")
-  ? "/jaswant-singh-site"
-  : "/";
-
-function AppRouter() {
+export default function App() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      {/* Fallback to 404 */}
-      <Route component={NotFound} />
-    </Switch>
+    <div
+      style={{
+        backgroundColor: "white",
+        color: "black",
+        padding: "40px",
+        fontSize: "32px",
+        textAlign: "center",
+      }}
+    >
+      🚀 SUCCESS — React is rendering correctly!
+      <br />
+      <br />
+      If you can see this text, the app is working.
+    </div>
   );
 }
-
-function App() {
-  return (
-    <Router base={basePath}>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <AppRouter />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </Router>
-  );
-}
-
-export default App;
