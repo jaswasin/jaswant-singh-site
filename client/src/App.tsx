@@ -8,7 +8,9 @@ import Home from "@/pages/Home";
 
 // Only use base path for production (GitHub Pages)
 // Local dev runs on root path
-const basePath = import.meta.env.PROD ? "/jaswant-singh-site" : "/";
+const basePath = window.location.hostname.endsWith("github.io")
+  ? "/jaswant-singh-site"
+  : "/";
 
 function AppRouter() {
   return (
